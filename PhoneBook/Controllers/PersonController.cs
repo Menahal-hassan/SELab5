@@ -1,10 +1,10 @@
 ﻿using PhoneBook.Models;
+using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using Microsoft.AspNet.Identity;
 
 namespace PhoneBook.Controllers
 {
@@ -45,7 +45,33 @@ namespace PhoneBook.Controllers
         // GET: Person/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            List<PersonDetails> l = new List<PersonDetails>();
+            PhoneBookDbEntities db = new PhoneBookDbEntities();
+            var v = db.person.ToList();
+            foreach (var i in v)
+            {
+                if (i.PersonId == id)
+                {
+                    PersonDetails p = new PersonDetails();
+                    p.personId = i.PersonId;
+                    p.FirstName = i.FirstName;
+                    p.MiddleName = i.MiddleName;
+                    p.LastName = i.LastName;
+                    p.dateOfBirth = Convert.ToDateTime(i.DateOfBirth);
+                    p.AddedOn = i.AddedOn;
+                    p.Homeaddress = i.HomeAddress;
+                    p.HomeCity = i.HomeCity;
+                    p.FacebookId = i.FaceBookAccountId;
+                    p.LinkedInId = i.LinkedInId;
+                    p.UpdateOn = Convert.ToDateTime(i.UpdateOn);
+                    p.ImagePath = i.ImagePath;
+                    p.TweeterId = i.TwitterId;
+                    p.EmailId = i.EmailId;
+                    l.Add(p);
+                }
+
+            }
+            return View(l);
         }
 
         // GET: Person/Create
@@ -68,7 +94,7 @@ namespace PhoneBook.Controllers
                 h.LastName = collections.LastName;
                 h.DateOfBirth = collections.dateOfBirth;
                 h.AddedOn = collections.AddedOn;
-                h.AddedBy = User.Identity.GetUserId();
+               // h.AddedBy = User.Identity.GetUserId();
                 h.HomeCity = collections.HomeCity;
                 h.EmailId = collections.EmailId;
                 h.TwitterId = collections.TweeterId;

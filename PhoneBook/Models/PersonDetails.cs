@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
-using System.ComponentModel.DataAnnotations;
+
 
 namespace PhoneBook.Models
 {
     public class PersonDetails
     {
-        [Required]
-        [Display(Name = "Person ID")]
+      
         public int personId { get; set; }
         [Required]
         [Display(Name = " First Name")]
@@ -21,7 +21,7 @@ namespace PhoneBook.Models
         public string LastName { get; set; }
         [Required]
         [Display(Name = " Date Of Birth")]
-
+        [DataType(DataType.Date)]
         public DateTime dateOfBirth { get; set; }
         [Required]
         [Display(Name = " Home Address")]
@@ -41,17 +41,16 @@ namespace PhoneBook.Models
         [Required]
         [Display(Name = " lINKED id")]
         public string LinkedInId { get; set; }
-        [Required]
-        [Display(Name = " Added On")]
+        
         public DateTime AddedOn { get; set; }
-        [Required]
-        [Display(Name = " Added By")]
+       
         public string AddedBy { get; set; }
         [Required]
         [Display(Name = " Image Path")]
         public string ImagePath { get; set; }
         [Required]
         [Display(Name = " Update On")]
+        [DataType(DataType.Date)]
         public DateTime UpdateOn { get; set; }
     }
 }
